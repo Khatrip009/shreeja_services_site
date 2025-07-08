@@ -1133,12 +1133,15 @@
                     doc.addImage(headerImgData, 'PNG', pageMargin, yOffset, contentWidth, headerImgHeight);
                     yOffset += headerImgHeight + 5; // Space after header
                 }
-                doc.addImage(imgData, 'PNG', pageMargin, yOffset, contentWidth, imgHeight);
+                const logoW = 60;
+                const logoH = (logoImg.height / logoImg.width) * logoW;
+                doc.addImage(logoImg, 'PNG', (a4Width - logoW) / 2, (a4Height - logoH) / 2, logoW, logoH);
+
                 yOffset += imgHeight + 10; // Space after content
             };
 
             // Add each section from the hidden PDF content div
-            const sections = pdfContent.querySelectorAll('.pdf-header, .pdf-section, .pdf-contact-info');
+           const sections = pdfContent.querySelectorAll('.pdf-header, .pdf-section, .pdf-contact-info, .pdf-page-break');
             for (const section of sections) {
                 if (section.classList.contains('pdf-page-break')) {
                     doc.addPage();
@@ -1164,7 +1167,7 @@
                 doc.setDrawColor(56, 161, 105); // Green color (Tailwind #38a169)
                 doc.setLineWidth(1.5); // Outer green border thickness
                 doc.rect(pageMargin, pageMargin, contentWidth, contentHeight); // Outer rectangle
-
+                doc.roundedRect(x, y, w, h, 4, 4, 'S');
                 doc.setDrawColor(246, 173, 85); // Orange color (Tailwind #f6ad55)
                 doc.setLineWidth(0.8); // Inner orange border thickness
                 // Adjust inner rectangle slightly inwards from the green border
