@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biogas Plant Design Calculator | Shreeja Bio-Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #0a6e3a;
+            --secondary: #0d8a4a;
+            --accent: #ff9800;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8fff8 0%, #e6f7ed 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 28px;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .home-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(10, 110, 58, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(10, 110, 58, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 110, 58, 0.9), rgba(10, 110, 58, 0.9)), url('https://images.unsplash.com/photo-1618477388954-7859a5c5d1b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        /* Calculator Section */
+        .calculator-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+        
+        .calculator-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section {
+            padding: 40px;
+            background: var(--light);
+        }
+        
+        .output-section {
+            padding: 40px;
+            background: white;
+            position: relative;
+        }
+        
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.05;
+            font-size: 120px;
+            font-weight: bold;
+            color: var(--primary);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(10, 110, 58, 0.2);
+        }
+        
+        .feedstock-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(10, 110, 58, 0.4);
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background: #e68a00;
+        }
+        
+        .btn-light {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .btn-light:hover {
+            background: #d8dde1;
+        }
+        
+        .results-box {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-top: 30px;
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 50px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .counter-box {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: var(--shadow);
+        }
+        
+        .counter-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .counter {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #aaa;
+            margin-bottom: 15px;
+            display: block;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            color: var(--accent);
+            font-size: 20px;
+            min-width: 30px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        
+        .hidden {
+            opacity: 0;
+        }
+        
+        .visitor-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-img">SB</div>
+                    <div class="logo-text">
+                        <h1>SHREEJA BIO-TECH</h1>
+                        <p>Innovating Energy, Advancing Solutions</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#calculator">Calculator</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="index.html" class="home-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>BioCNG Plant Design Calculator</h2>
+            <p>Optimize your biogas production with our advanced calculator. Input your feedstock details and get instant project specifications, cost estimates, and feasibility analysis.</p>
+            <a href="#calculator" class="btn btn-accent">Get Started <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Plant Design Calculator</h2>
+                <p>Enter your feedstock details to calculate plant specifications, production output, and financial feasibility</p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="input-section">
+                    <h3>Feedstock Information</h3>
+                    <p class="form-group">Select feedstock types and enter daily quantities</p>
+                    
+                    <div class="form-group">
+                        <label>Feedstock 1</label>
+                        <div class="feedstock-grid">
+                            <select class="form-control feedstock-type">
+                                <option value="napier">Napier Grass</option>
+                                <option value="cowdung">Cow Dung</option>
+                                <option value="agriculture">Agriculture Residue</option>
+                                <option value="pressmud">Press Mud</option>
+                                <option value="spentwash">Spent Wash</option>
+                                <option value="municipal">Municipal Solid Waste</option>
+                                <option value="chicken">Chicken Litter</option>
+                                <option value="forest">Forest Residue</option>
+                                <option value="sewage">Sewage Waste</option>
+                            </select>
+                            <input type="number" class="form-control feedstock-qty" placeholder="Tons" value="10" min="1">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Feedstock 2 (Optional)</label>
+                        <div class="feedstock-grid">
+                            <select class="form-control feedstock-type">
+                                <option value="">Select Feedstock</option>
+                                <option value="napier">Napier Grass</option>
+                                <option value="cowdung" selected>Cow Dung</option>
+                                <option value="agriculture">Agriculture Residue</option>
+                                <option value="pressmud">Press Mud</option>
+                                <option value="spentwash">Spent Wash</option>
+                                <option value="municipal">Municipal Solid Waste</option>
+                                <option value="chicken">Chicken Litter</option>
+                                <option value="forest">Forest Residue</option>
+                                <option value="sewage">Sewage Waste</option>
+                            </select>
+                            <input type="number" class="form-control feedstock-qty" placeholder="Tons" value="5" min="1">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button id="add-feedstock" class="btn btn-light">
+                            <i class="fas fa-plus"></i> Add Another Feedstock
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Desired BioCNG Output (kg/day)</label>
+                        <input type="number" id="desired-output" class="form-control" value="1000" min="100">
+                    </div>
+                    
+                    <button id="calculate-btn" class="btn btn-block">Calculate Plant Specifications</button>
+                </div>
+                
+                <div class="output-section">
+                    <div class="watermark">SHREEJA BIO-TECH</div>
+                    <h3>Plant Specifications</h3>
+                    <p>Based on your input feedstock</p>
+                    
+                    <div class="results-box">
+                        <div class="result-item">
+                            <span>Total Feedstock</span>
+                            <span class="result-value" id="total-feedstock">15 tons/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Water Requirement</span>
+                            <span class="result-value" id="water-req">3 tons/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Digester Volume</span>
+                            <span class="result-value" id="digester-vol">540 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Raw Biogas Production</span>
+                            <span class="result-value" id="raw-biogas">1,250 m³/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span>BioCNG Output</span>
+                            <span class="result-value" id="biocng-output">625 kg/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Purification System</span>
+                            <span class="result-value">Semi-Cryogenic (1,500 m³/day)</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Required Land Area</span>
+                            <span class="result-value" id="land-area">1.2 acres</span>
+                        </div>
+                    </div>
+                    
+                    <h4>Financial Feasibility</h4>
+                    <div class="results-box">
+                        <div class="result-item">
+                            <span>Estimated Project Cost</span>
+                            <span class="result-value" id="project-cost">₹31,250,000</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Cost per 1000 kg BioCNG</span>
+                            <span class="result-value">₹50,000,000</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Payback Period</span>
+                            <span class="result-value" id="payback">4-5 years</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Annual Revenue Potential</span>
+                            <span class="result-value" id="revenue">₹9,375,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                    
+                    <button id="download-pdf" class="btn btn-accent btn-block">
+                        <i class="fas fa-download"></i> Download Full Report (PDF)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Get Detailed Project Report</h3>
+                <p>Submit your details to receive a comprehensive feasibility report</p>
+                
+                <form id="contact-form" action="https://formsubmit.co/info@shreejabiotech.shop" method="POST">
+                    <input type="hidden" name="_subject" value="New BioCNG Project Inquiry">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company/Organization</label>
+                            <input type="text" name="company" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Project Location</label>
+                        <input type="text" name="location" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" class="form-control" rows="4" placeholder="Tell us about your project requirements..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">Submit & Download Full Report</button>
+                </form>
+            </div>
+            
+            <div class="counter-box">
+                <h3>Join our growing community of sustainable energy pioneers</h3>
+                <div class="counter" id="visitor-counter">1248</div>
+                <p>Industry professionals have used our calculator</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="calculator-section" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Benefits of BioCNG</h2>
+                <p>Discover the economic and environmental advantages of investing in biogas technology</p>
+            </div>
+            
+            <div class="benefits-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div class="results-box animate">
+                    <h3><i class="fas fa-globe-asia" style="color: var(--primary); margin-right: 10px;"></i> Environmental Impact</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li style="margin-bottom: 10px;">Reduces greenhouse gas emissions by up to 90%</li>
+                        <li style="margin-bottom: 10px;">Converts organic waste into valuable energy</li>
+                        <li style="margin-bottom: 10px;">Produces organic fertilizer as byproduct</li>
+                        <li>Decreases reliance on fossil fuels</li>
+                    </ul>
+                </div>
+                
+                <div class="results-box animate delay-1">
+                    <h3><i class="fas fa-chart-line" style="color: var(--primary); margin-right: 10px;"></i> Economic Advantages</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li style="margin-bottom: 10px;">Attractive ROI with payback in 4-6 years</li>
+                        <li style="margin-bottom: 10px;">Government subsidies and incentives available</li>
+                        <li style="margin-bottom: 10px;">Diversified revenue streams (gas, carbon credits)</li>
+                        <li>Reduced waste disposal costs</li>
+                    </ul>
+                </div>
+                
+                <div class="results-box animate delay-2">
+                    <h3><i class="fas fa-industry" style="color: var(--primary); margin-right: 10px;"></i> Why Choose Shreeja</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li style="margin-bottom: 10px;">15+ years of industry expertise</li>
+                        <li style="margin-bottom: 10px;">International project experience</li>
+                        <li style="margin-bottom: 10px;">Patent-pending purification technology</li>
+                        <li>End-to-end turnkey solutions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="calculator-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Shreeja Bio-Tech</h2>
+                <p>Global leaders in waste-to-energy solutions and bio-CNG technology</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <h3>Our Mission</h3>
+                    <p style="margin: 20px 0; font-size: 18px; line-height: 1.8;">
+                        "To develop, innovate, and implement world-class renewable energy solutions that transform organic waste into high-value, sustainable energy resources while promoting environmental responsibility."
+                    </p>
+                    
+                    <h3>Global Presence</h3>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <div style="flex: 1; background: var(--light); padding: 20px; border-radius: 10px; text-align: center;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 36px; color: var(--primary); margin-bottom: 15px;"></i>
+                            <h4>India</h4>
+                            <p>Headquarters in Surat, Gujarat</p>
+                        </div>
+                        <div style="flex: 1; background: var(--light); padding: 20px; border-radius: 10px; text-align: center;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 36px; color: var(--primary); margin-bottom: 15px;"></i>
+                            <h4>Malaysia</h4>
+                            <p>Regional office in Kajang</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--light); border-radius: 10px; padding: 30px; box-shadow: var(--shadow);">
+                    <h3 style="margin-bottom: 20px;">Core Expertise</h3>
+                    <ul style="columns: 2; list-style-position: inside;">
+                        <li style="margin-bottom: 12px;">Waste-to-Energy Plants</li>
+                        <li style="margin-bottom: 12px;">Bio-CNG Plant Design</li>
+                        <li style="margin-bottom: 12px;">Anaerobic Digestion Technology</li>
+                        <li style="margin-bottom: 12px;">Semi-Cryogenic Purification</li>
+                        <li style="margin-bottom: 12px;">Turnkey Project Execution</li>
+                        <li style="margin-bottom: 12px;">Carbon Credit Consulting</li>
+                        <li style="margin-bottom: 12px;">Government Liaisoning</li>
+                        <li style="margin-bottom: 12px;">R&D in Biogas Innovation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shreeja Bio-Tech</h3>
+                    <p>Leading renewable energy company specializing in Waste-to-Energy (WTE) and Bio-CNG plant designing with large-scale turnkey project execution.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                372, V Square, Palanpur jakatnaka,<br>
+                                Surat - 395 005, Gujarat, India
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>+91 70697 85900</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>shreeja.biotech@gmail.com<br>info@shreejabiotech.shop</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#calculator">Plant Calculator</a>
+                    <a href="#benefits">Benefits of BioCNG</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                    <a href="index.html">Home Page</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>International Offices</h3>
+                    <p><strong>Malaysia Office:</strong><br>
+                        7.2, Alain Petra 3, Tamah Patra Kajang, 0300, Kajang, Seimur, Malaysia<br>
+                        Tel: +6937411466</p>
+                    <p><strong>Tewegganu Office:</strong><br>
+                        3189, Kingstil, Penant Namori, Alain Baba Ban, 10304 Nada Tewegganu, Tewegganu, Malaysia<br>
+                        Tel: +49 6222049 6223211</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Shreeja Bio-Tech. All Rights Reserved. | GST No.: 24AFNFS8878N1ZS
+            </div>
+        </div>
+    </footer>
+
+    <!-- Visitor Badge -->
+    <div class="visitor-badge">
+        <i class="fas fa-users"></i>
+        <span id="current-visitors">1248</span> Visitors
+    </div>
+
+    <script>
+        // Initialize visitor counter
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize visitor counter
+            let visitorCount = localStorage.getItem('visitorCount');
+            if (!visitorCount) {
+                visitorCount = 1248;
+            } else {
+                visitorCount = parseInt(visitorCount) + 1;
+            }
+            localStorage.setItem('visitorCount', visitorCount);
+            document.getElementById('visitor-counter').textContent = visitorCount;
+            document.getElementById('current-visitors').textContent = visitorCount;
+            
+            // Initialize chart
+            const ctx = document.getElementById('productionChart').getContext('2d');
+            const productionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Napier Grass', 'Cow Dung', 'Total'],
+                    datasets: [{
+                        label: 'Biogas Production (m³)',
+                        data: [1000, 250, 1250],
+                        backgroundColor: [
+                            'rgba(10, 110, 58, 0.7)',
+                            'rgba(13, 138, 74, 0.7)',
+                            'rgba(255, 152, 0, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(10, 110, 58, 1)',
+                            'rgba(13, 138, 74, 1)',
+                            'rgba(255, 152, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'm³ per day'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Feedstock Biogas Production'
+                        }
+                    }
+                }
+            });
+            
+            // Animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.hidden').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Calculate function
+            document.getElementById('calculate-btn').addEventListener('click', function() {
+                // Get feedstock values
+                const feedstock1Type = document.querySelector('.feedstock-type').value;
+                const feedstock1Qty = parseFloat(document.querySelector('.feedstock-qty').value) || 0;
+                
+                const feedstock2Type = document.querySelectorAll('.feedstock-type')[1].value;
+                const feedstock2Qty = parseFloat(document.querySelectorAll('.feedstock-qty')[1].value) || 0;
+                
+                // Calculate total feedstock
+                const totalFeedstock = feedstock1Qty + feedstock2Qty;
+                document.getElementById('total-feedstock').textContent = totalFeedstock.toFixed(1) + ' tons/day';
+                
+                // Calculate water requirement (20% of total feedstock)
+                const waterReq = totalFeedstock * 0.2;
+                document.getElementById('water-req').textContent = waterReq.toFixed(1) + ' tons/day';
+                
+                // Calculate digester volume (retention time 30 days + 15% buffer)
+                const digesterVol = (totalFeedstock + waterReq) * 30 * 1.15;
+                document.getElementById('digester-vol').textContent = digesterVol.toFixed(0) + ' m³';
+                
+                // Calculate biogas production (using example ratios)
+                let biogasProduction = 0;
+                if (feedstock1Type === 'napier') biogasProduction += feedstock1Qty * 100;
+                if (feedstock1Type === 'cowdung') biogasProduction += feedstock1Qty * 50;
+                if (feedstock2Type === 'napier') biogasProduction += feedstock2Qty * 100;
+                if (feedstock2Type === 'cowdung') biogasProduction += feedstock2Qty * 50;
+                
+                document.getElementById('raw-biogas').textContent = biogasProduction.toLocaleString() + ' m³/day';
+                
+                // Calculate BioCNG output (assuming 50% conversion from raw biogas to BioCNG by weight)
+                // 1 m³ biogas ≈ 0.714 kg BioCNG (methane)
+                const biocngOutput = biogasProduction * 0.5;
+                document.getElementById('biocng-output').textContent = biocngOutput.toFixed(0) + ' kg/day';
+                
+                // Calculate land area (0.5 m² per m³ of digester volume)
+                const landArea = digesterVol * 0.5 / 4046.86; // Convert to acres
+                document.getElementById('land-area').textContent = landArea.toFixed(1) + ' acres';
+                
+                // Calculate project cost (₹50,000 per kg/day capacity)
+                const projectCost = biocngOutput * 50000;
+                document.getElementById('project-cost').textContent = '₹' + projectCost.toLocaleString('en-IN');
+                
+                // Calculate annual revenue (assuming ₹40/kg BioCNG, 330 operational days)
+                const annualRevenue = biocngOutput * 40 * 330;
+                document.getElementById('revenue').textContent = '₹' + annualRevenue.toLocaleString('en-IN');
+                
+                // Update chart data
+                productionChart.data.datasets[0].data = [
+                    feedstock1Type === 'napier' ? feedstock1Qty * 100 : 0,
+                    feedstock1Type === 'cowdung' ? feedstock1Qty * 50 : 0,
+                    biogasProduction
+                ];
+                productionChart.update();
+            });
+            
+            // Simulate initial calculation
+            setTimeout(() => {
+                document.getElementById('calculate-btn').click();
+            }, 1000);
+            
+            // Add feedstock row
+            document.getElementById('add-feedstock').addEventListener('click', function() {
+                const newGroup = document.createElement('div');
+                newGroup.className = 'form-group';
+                newGroup.innerHTML = `
+                    <label>Additional Feedstock</label>
+                    <div class="feedstock-grid">
+                        <select class="form-control feedstock-type">
+                            <option value="">Select Feedstock</option>
+                            <option value="napier">Napier Grass</option>
+                            <option value="cowdung">Cow Dung</option>
+                            <option value="agriculture">Agriculture Residue</option>
+                            <option value="pressmud">Press Mud</option>
+                            <option value="spentwash">Spent Wash</option>
+                            <option value="municipal">Municipal Solid Waste</option>
+                            <option value="chicken">Chicken Litter</option>
+                            <option value="forest">Forest Residue</option>
+                            <option value="sewage">Sewage Waste</option>
+                        </select>
+                        <input type="number" class="form-control feedstock-qty" placeholder="Tons" min="1">
+                    </div>
+                `;
+                this.parentNode.parentNode.insertBefore(newGroup, this.parentNode);
+            });
+            
+            // PDF Generation
+            document.getElementById('download-pdf').addEventListener('click', function() {
+                generatePDF();
+            });
+            
+            // Form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Submit form via FormSubmit
+                fetch('https://formsubmit.co/ajax/info@shreejabiotech.shop', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: this.name.value,
+                        email: this.email.value,
+                        phone: this.phone.value,
+                        company: this.company.value,
+                        location: this.location.value,
+                        message: this.message.value,
+                        _subject: "New BioCNG Project Inquiry"
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Generate PDF after successful submission
+                        generatePDF();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    generatePDF();
+                });
+            });
+            
+            // Generate PDF function
+            function generatePDF() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+                
+                // Add watermark
+                doc.setFontSize(60);
+                doc.setTextColor(230, 230, 230);
+                doc.text('SHREEJA BIO-TECH', 30, 150, { angle: 45 });
+                
+                // Reset text color
+                doc.setTextColor(0, 0, 0);
+                
+                // Add header
+                doc.setFontSize(24);
+                doc.setFont(undefined, 'bold');
+                doc.text('BIOGAS PLANT FEASIBILITY REPORT', 105, 20, null, null, 'center');
+                
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(100, 100, 100);
+                doc.text('Generated by Shreeja Bio-Tech Design Calculator', 105, 26, null, null, 'center');
+                
+                // Add company info
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 0);
+                doc.text('Shreeja Bio-Tech | 372, V Square, Palanpur jakatnaka, Surat - 395 005, Gujarat, India', 20, 35);
+                doc.text('Tel: +91 70697 85900 | Email: info@shreejabiotech.shop | GST No.: 24AFNFS8878N1ZS', 20, 40);
+                
+                // Add line separator
+                doc.setDrawColor(10, 110, 58);
+                doc.setLineWidth(0.5);
+                doc.line(20, 45, 190, 45);
+                
+                // Add report content
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Plant Specifications', 20, 55);
+                
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Total Feedstock: ${document.getElementById('total-feedstock').textContent}`, 20, 65);
+                doc.text(`Water Requirement: ${document.getElementById('water-req').textContent}`, 20, 70);
+                doc.text(`Digester Volume: ${document.getElementById('digester-vol').textContent}`, 20, 75);
+                doc.text(`Raw Biogas Production: ${document.getElementById('raw-biogas').textContent}`, 20, 80);
+                doc.text(`BioCNG Output: ${document.getElementById('biocng-output').textContent}`, 20, 85);
+                doc.text(`Required Land Area: ${document.getElementById('land-area').textContent}`, 20, 90);
+                
+                doc.text(`Estimated Project Cost: ${document.getElementById('project-cost').textContent}`, 20, 100);
+                doc.text(`Annual Revenue Potential: ${document.getElementById('revenue').textContent}`, 20, 105);
+                doc.text(`Payback Period: ${document.getElementById('payback').textContent}`, 20, 110);
+                
+                // Add benefits section
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Benefits of BioCNG', 20, 125);
+                
+                doc.setFontSize(10);
+                doc.text('- Reduces greenhouse gas emissions by up to 90%', 20, 135);
+                doc.text('- Converts organic waste into valuable energy', 20, 140);
+                doc.text('- Produces organic fertilizer as byproduct', 20, 145);
+                doc.text('- Attractive ROI with payback in 4-6 years', 20, 150);
+                
+                // Add why choose Shreeja
+                doc.setFontSize(14);
+                doc.setFont(undefined, 'bold');
+                doc.text('Why Choose Shreeja Bio-Tech', 20, 165);
+                
+                doc.setFontSize(10);
+                doc.text('- 15+ years of industry expertise', 20, 175);
+                doc.text('- International project experience (India, Malaysia)', 20, 180);
+                doc.text('- Patent-pending purification technology', 20, 185);
+                doc.text('- End-to-end turnkey solutions', 20, 190);
+                doc.text('- Government scheme and financing assistance', 20, 195);
+                
+                // Add footer
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text('Report generated on: ' + new Date().toLocaleDateString(), 20, 280);
+                doc.text('© 2023 Shreeja Bio-Tech. All Rights Reserved.', 20, 285);
+                
+                // Save the PDF
+                doc.save('Shreeja_BioTech_Plant_Report.pdf');
+            }
+        });
+    </script>
+</body>
+</html>
