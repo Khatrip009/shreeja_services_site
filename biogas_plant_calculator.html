@@ -813,7 +813,7 @@
             <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #f6ad55, rgba(0, 0, 0, 0)); margin: 10px auto; width: 50%;">
             <p>For Shreeja BioTech</p>
             <p>Authorized Signatory: Mr. Pankaj Khatri, Partner</p>
-            <p>Email ID: info@shreejabiotech.shop</p>
+            <p>Email ID: khatrip.009@gmail.com</p>
             <p>Website: www.shreejabiotech.shop</p>
             <p>Phone: +91 70697 85900</p>
             <p>Address: 372, V Square, Palanpur jakatnaka, Surat - 395 005</p>
@@ -1078,130 +1078,114 @@
             }, 500); // Small delay to show loader
         }
 
-    async function downloadPdf() {
-    const pdfContent = document.getElementById('pdfContent');
-    pdfContent.style.left = '0';
+        async function downloadPdf() {
+            const pdfContent = document.getElementById('pdfContent');
+            pdfContent.style.left = '0'; // Make visible for rendering
 
-    const mainWatermark = document.querySelector('.shreeja-watermark');
-    if (mainWatermark) mainWatermark.style.display = 'none';
+            // Temporarily hide the watermark on the main page to avoid it being captured twice
+            const mainWatermark = document.querySelector('.shreeja-watermark');
+            mainWatermark.style.display = 'none';
 
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
-    const pageMargin = 7.62;
-    const a4Width = doc.internal.pageSize.getWidth();
-    const a4Height = doc.internal.pageSize.getHeight();
-    const contentWidth = a4Width - (2 * pageMargin);
-    const contentHeight = a4Height - (2 * pageMargin);
-    let yOffset = pageMargin;
+            // Load the logo image first
+            const logoImg = new Image();
+            logoImg.src = 'Shreeja_LOGO.png';
+            let logoLoaded = false;
 
-    let logoImg = null;
-    let logoLoaded = false;
+            await new Promise((resolve) => {
+                logoImg.onload = () => {
+                    logoLoaded = true;
+                    resolve();
+                };
+                logoImg.onerror = () => {
+                    console.error("Failed to load Shreeja_LOGO.png for PDF watermark.");
+                    resolve(); // Resolve even on error to not block PDF generation
+                };
+            });
 
-    // Load the logo image with CORS handling
-    try {
-      logoImg = new Image();
-      logoImg.crossOrigin = "anonymous";
-      logoImg.src = "Shreeja_LOGO.png";
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
 
-      await new Promise((resolve) => {
-        logoImg.onload = () => {
-          logoLoaded = true;
-          resolve();
-        };
-        logoImg.onerror = () => {
-          console.warn("Logo failed to load, watermark skipped.");
-          resolve();
-        };
-      });
-    } catch (e) {
-      console.warn("Logo preload error:", e);
-    }
+            const pageMargin = 7.62; // 0.3 inches in mm
+            const a4Width = doc.internal.pageSize.getWidth();
+            const a4Height = doc.internal.pageSize.getHeight();
+            const contentWidth = a4Width - (2 * pageMargin);
+            const contentHeight = a4Height - (2 * pageMargin);
 
-    // Function to add any section to the PDF
-    const addContentToPdf = async (element) => {
-      try {
-        const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-        const imgData = canvas.toDataURL("image/png");
-        const imgProps = doc.getImageProperties(imgData);
-        const imgHeight = (imgProps.height * contentWidth) / imgProps.width;
+            let yOffset = pageMargin; // Initial Y offset for content, respecting top margin
 
-        const availableHeight = a4Height - yOffset - pageMargin;
+            // Function to add content to PDF and handle page breaks
+            const addContentToPdf = async (element, doc, yStart) => {
+                const canvas = await html2canvas(element, { scale: 2, useCORS: true, logging: false });
+                const imgData = canvas.toDataURL('image/png');
+                const imgProps = doc.getImageProperties(imgData);
+                let imgHeight = (imgProps.height * contentWidth) / imgProps.width;
 
-        if (imgHeight > availableHeight) {
-          doc.addPage();
-          yOffset = pageMargin;
+                const availableHeight = a4Height - yStart - pageMargin; // Space left on current page
 
-          // Add header on new page
-          const headerCanvas = await html2canvas(document.querySelector('.pdf-header'), { scale: 2, useCORS: true });
-          const headerData = headerCanvas.toDataURL("image/png");
-          const headerProps = doc.getImageProperties(headerData);
-          const headerHeight = (headerProps.height * contentWidth) / headerProps.width;
-          doc.addImage(headerData, "PNG", pageMargin, yOffset, contentWidth, headerHeight);
-          yOffset += headerHeight + 5;
+                if (imgHeight > availableHeight) {
+                    doc.addPage();
+                    yOffset = pageMargin; // Reset yOffset for new page, respecting top margin
+                    // Add header to new page (re-add header on new page after page break)
+                    const headerCanvas = await html2canvas(document.querySelector('.pdf-header'), { scale: 2, useCORS: true, logging: false });
+                    const headerImgData = headerCanvas.toDataURL('image/png');
+                    const headerImgProps = doc.getImageProperties(headerImgData);
+                    const headerImgHeight = (headerImgProps.height * contentWidth) / headerImgProps.width;
+                    doc.addImage(headerImgData, 'PNG', pageMargin, yOffset, contentWidth, headerImgHeight);
+                    yOffset += headerImgHeight + 5; // Space after header
+                }
+                doc.addImage(imgData, 'PNG', pageMargin, yOffset, contentWidth, imgHeight);
+                yOffset += imgHeight + 10; // Space after content
+            };
+
+            // Add each section from the hidden PDF content div
+            const sections = pdfContent.querySelectorAll('.pdf-header, .pdf-section, .pdf-contact-info');
+            for (const section of sections) {
+                if (section.classList.contains('pdf-page-break')) {
+                    doc.addPage();
+                    yOffset = pageMargin; // Reset yOffset for new page, respecting top margin
+                    // Add header to new page (re-add header on new page after page break)
+                    const headerCanvas = await html2canvas(document.querySelector('.pdf-header'), { scale: 2, useCORS: true, logging: false });
+                    const headerImgData = headerCanvas.toDataURL('image/png');
+                    const headerImgProps = doc.getImageProperties(headerImgData);
+                    const headerImgHeight = (headerImgProps.height * contentWidth) / headerImgProps.width;
+                    doc.addImage(headerImgData, 'PNG', pageMargin, yOffset, contentWidth, headerImgHeight);
+                    yOffset += headerImgHeight + 5; // Space after header
+                    continue;
+                }
+                await addContentToPdf(section, doc, yOffset);
+            }
+
+            // Add border and watermark to each page AFTER all content has been added
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+
+                // Draw the borders
+                doc.setDrawColor(56, 161, 105); // Green color (Tailwind #38a169)
+                doc.setLineWidth(1.5); // Outer green border thickness
+                doc.rect(pageMargin, pageMargin, contentWidth, contentHeight); // Outer rectangle
+
+                doc.setDrawColor(246, 173, 85); // Orange color (Tailwind #f6ad55)
+                doc.setLineWidth(0.8); // Inner orange border thickness
+                // Adjust inner rectangle slightly inwards from the green border
+                doc.rect(pageMargin + 1.5, pageMargin + 1.5, contentWidth - 3, contentHeight - 3);
+
+                // Add watermark
+                if (logoLoaded) { // Only add watermark if logo loaded successfully
+                    doc.setGState(new jsPDF.GState({ opacity: 0.1 })); // Set opacity for watermark
+                    // Position watermark relative to page, considering margins
+                    doc.addImage(logoImg, 'PNG', a4Width - pageMargin - 50, a4Height - pageMargin - 50, 50, 50);
+                    doc.setGState(new jsPDF.GState({ opacity: 1 })); // Reset opacity
+                }
+            }
+
+            // Save the PDF
+            doc.save('Shreeja_BioCNG_Feasibility_Report.pdf');
+
+            // Restore visibility and watermark on main page
+            pdfContent.style.left = '-9999px';
+            mainWatermark.style.display = 'block';
         }
-
-        doc.addImage(imgData, "PNG", pageMargin, yOffset, contentWidth, imgHeight);
-        yOffset += imgHeight + 10;
-      } catch (err) {
-        console.error("Error rendering section:", element, err);
-      }
-    };
-
-    // Loop through all report sections
-    const sections = pdfContent.querySelectorAll('.pdf-header, .pdf-section, .pdf-contact-info, .pdf-page-break');
-    for (const section of sections) {
-      if (section.classList.contains('pdf-page-break')) {
-        doc.addPage();
-        yOffset = pageMargin;
-
-        const headerCanvas = await html2canvas(document.querySelector('.pdf-header'), { scale: 2, useCORS: true });
-        const headerData = headerCanvas.toDataURL("image/png");
-        const headerProps = doc.getImageProperties(headerData);
-        const headerHeight = (headerProps.height * contentWidth) / headerProps.width;
-        doc.addImage(headerData, "PNG", pageMargin, yOffset, contentWidth, headerHeight);
-        yOffset += headerHeight + 5;
-        continue;
-      }
-
-      await addContentToPdf(section);
-    }
-
-    // Final loop: draw borders and watermark
-    const totalPages = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= totalPages; i++) {
-      doc.setPage(i);
-
-      // Borders
-      doc.setDrawColor(56, 161, 105);
-      doc.setLineWidth(1.5);
-      doc.rect(pageMargin, pageMargin, contentWidth, contentHeight);
-
-      doc.setDrawColor(246, 173, 85);
-      doc.setLineWidth(0.8);
-      doc.rect(pageMargin + 1.5, pageMargin + 1.5, contentWidth - 3, contentHeight - 3);
-
-      // Watermark (centered)
-      if (logoLoaded) {
-        try {
-          doc.setGState(new jsPDF.GState({ opacity: 0.08 }));
-          const logoW = 60;
-          const logoH = (logoImg.height / logoImg.width) * logoW;
-          const logoX = (a4Width - logoW) / 2;
-          const logoY = (a4Height - logoH) / 2;
-          doc.addImage(logoImg, 'PNG', logoX, logoY, logoW, logoH);
-          doc.setGState(new jsPDF.GState({ opacity: 1 }));
-        } catch (err) {
-          console.warn("Watermark skipped:", err);
-        }
-      }
-    }
-
-    doc.save("Shreeja_BioCNG_Feasibility_Report.pdf");
-
-    // Reset visibility
-    pdfContent.style.left = "-9999px";
-    if (mainWatermark) mainWatermark.style.display = 'block';
-  }
     </script>
 </body>
 </html>
