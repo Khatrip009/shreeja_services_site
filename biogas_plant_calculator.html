@@ -1089,18 +1089,26 @@
             // Load the logo image first
             const logoImg = new Image();
             logoImg.src = 'Shreeja_LOGO.png';
-            let logoLoaded = false;
+            let logoImg = new Image();
+let logoLoaded = false;
 
-            await new Promise((resolve) => {
-                logoImg.onload = () => {
-                    logoLoaded = true;
-                    resolve();
-                };
-                logoImg.onerror = () => {
-                    console.error("Failed to load Shreeja_LOGO.png for PDF watermark.");
-                    resolve(); // Resolve even on error to not block PDF generation
-                };
-            });
+try {
+  await new Promise((resolve) => {
+    logoImg.onload = () => {
+      logoLoaded = true;
+      resolve();
+    };
+    logoImg.onerror = () => {
+      console.warn("Shreeja_LOGO.png could not be loaded. Skipping watermark.");
+      resolve();
+    };
+    logoImg.crossOrigin = "anonymous";
+    logoImg.src = "Shreeja_LOGO.png";
+  });
+} catch (e) {
+  console.warn("Logo load exception:", e);
+}
+
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
