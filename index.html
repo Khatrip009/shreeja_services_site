@@ -3,72 +3,969 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta property="og:title" content="Shreeja Biotech – Bio-CNG Solutions"/>
-<meta name="description" content="Shreeja Biotech offers innovative Bio-CNG, biogas, and waste-to-energy solutions across India and beyond.">
-<meta name="author" content="Shreeja Biotech">
-<meta name="robots" content="index, follow">
-<meta property="og:image" content="Shreeja_LOGO.png"/>
-<meta property="og:title" content="Shreeja Biotech – Bio-CNG Experts">
-<meta property="og:description" content="Renewable energy solutions, biogas, and turnkey Bio-CNG plant consulting by Shreeja Biotech.">
-<meta property="og:image" content="Shreeja_LOGO.png">
-<meta property="og:url" content="https://shreejabiotech.shop">
-<meta property="og:type" content="website">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
-
+  <meta content="Shreeja Biotech – Bio-CNG Solutions" property="og:title"/>
+  <meta content="Shreeja Biotech offers innovative Bio-CNG, biogas, and waste-to-energy solutions across India and beyond." name="description"/>
+  <meta content="Shreeja Biotech" name="author"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="Shreeja_LOGO.png" property="og:image"/>
+  <meta content="Shreeja Biotech – Bio-CNG Experts" property="og:title"/>
+  <meta content="Renewable energy solutions, biogas, and turnkey Bio-CNG plant consulting by Shreeja Biotech." property="og:description"/>
+  <meta content="Shreeja_LOGO.png" property="og:image"/>
+  <meta content="https://shreejabiotech.shop" property="og:url"/>
+  <meta content="website" property="og:type"/>
+  <link href="images/favicon.ico" rel="icon" type="image/x-icon"/>
   <title>
-   Shreeja Biotech | Powering Tomorrow, Naturally
+   Shreeja Biotech | Innovating Energy, Advancing Solutions
   </title>
   <meta content="Leading Bio-CNG production from organic waste. Renewable energy solutions for a sustainable future." name="description"/>
   <meta content="Bio-CNG, renewable energy, biogas, waste-to-energy, sustainable solutions, Gujarat" name="keywords"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/chart.js">
   </script>
-  <!-- Assuming these CSS files are in the same directory or accessible -->
-  <link href="style_updated.css" rel="stylesheet"/>
-  <link href="shape_style.css" rel="stylesheet"/>
-  <link href="style_final.css" rel="stylesheet"/>
- <link href="services.css" rel="stylesheet"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com">
+  </script>
   <style>
-    /* Add or adjust CSS for mobile navigation here if not already in external files */
-    header .container nav ul {
+    /* Global Styles for the dark, futuristic theme */
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0a0a1a; /* Very dark blue/black */
+        color: #e0e0e0; /* Light gray text */
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    section {
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-title h2 {
+        font-size: 2.8rem;
+        color: #00eaff; /* Bright blue for titles */
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title h2::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: #00eaff;
+        box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+        border-radius: 5px;
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        background: linear-gradient(45deg, #00eaff, #00aaff);
+        color: #0a0a1a;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 234, 255, 0.4);
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn:hover {
+        background: linear-gradient(45deg, #00aaff, #00eaff);
+        box-shadow: 0 8px 20px rgba(0, 234, 255, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: #00eaff;
+        border: 2px solid #00eaff;
+        box-shadow: none;
+        padding: 10px 23px;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(0, 234, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 234, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Card Base Style */
+    .card-base {
+        background-color: #1a1a3a; /* Darker blue for cards */
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 8px 25px rgba(0, 234, 255, 0.1);
+        border: 1px solid rgba(0, 234, 255, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-base::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(0, 234, 255, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 0;
+    }
+
+    .card-base:hover::before {
+        opacity: 1;
+    }
+
+    .card-base > * { /* Ensure content is above the pseudo-element */
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Header */
+    header {
+        background-color: #0a0a1a;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 234, 255, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 15px rgba(0, 234, 255, 0.2);
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+
+    .logo-text h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: #e0e0e0;
+    }
+
+    .logo-text span {
+        color: #00eaff;
+    }
+
+    nav ul {
         list-style: none;
         margin: 0;
         padding: 0;
-        display: flex; /* Default for desktop */
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.05rem;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #00eaff;
+        text-shadow: 0 0 8px #00eaff;
+    }
+
+    /* Mobile Navigation */
+    .mobile-toggle {
+        display: none; /* Hidden by default on desktop */
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #00eaff;
     }
 
     @media (max-width: 768px) {
-        header .container nav ul {
-            display: none; /* Hide by default on mobile */
+        nav ul {
+            display: none;
             flex-direction: column;
             width: 100%;
             position: absolute;
-            top: 100px; /* Adjust based on your header height */
+            top: 90px; /* Adjust based on header height */
             left: 0;
-            background-color: #ffffff; /* Or your header background */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 1000;
+            background-color: #0a0a1a;
+            box-shadow: 0 4px 10px rgba(0, 234, 255, 0.2);
+            z-index: 999;
+            padding: 20px 0;
+            border-radius: 0 0 10px 10px;
         }
-        header .container nav ul.active {
-            display: flex; /* Show when active */
+        nav ul.active {
+            display: flex;
         }
-        header .container nav ul li {
+        nav ul li {
+            margin: 10px 0;
             text-align: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
         }
-        header .container nav ul li:last-child {
-            border-bottom: none;
+        nav ul li a {
+            padding: 10px 0;
+            display: block;
         }
         .mobile-toggle {
-            display: block; /* Show toggle button on mobile */
-            font-size: 1.5rem;
-            cursor: pointer;
+            display: block;
+        }
+        .header-container {
+            flex-wrap: wrap;
         }
     }
-    /* Styles for Modals (Inquiry and Investor Form) */
+
+    /* Hero Section */
+    .hero {
+        background: url('futuristic_background.jpg') no-repeat center center/cover; /* Placeholder for futuristic background */
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-content h1 {
+        font-size: 4.5rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(0, 234, 255, 0.7);
+        line-height: 1.1;
+    }
+
+    .hero-content p {
+        font-size: 1.4rem;
+        color: #c0c0c0;
+        margin-bottom: 40px;
+    }
+
+    .hero-btns .btn {
+        margin: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            height: auto;
+            padding: 100px 0;
+        }
+        .hero-content h1 {
+            font-size: 2.8rem;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+        }
+        .hero-btns {
+            flex-direction: column;
+            gap: 15px;
+        }
+        .hero-btns .btn {
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    /* About Section */
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .about-text {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    .about-text h2 {
+        font-size: 2.2rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+    }
+
+    .about-text p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        color: #c0c0c0;
+    }
+
+    .mission-vision {
+        display: flex;
+        gap: 30px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .mission, .vision {
+        flex: 1;
+        min-width: 280px;
+        background-color: #1a1a3a;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 234, 255, 0.2);
+        box-shadow: 0 5px 15px rgba(0, 234, 255, 0.1);
+    }
+
+    .mission h3, .vision h3 {
+        color: #00eaff;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .about-stats {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Process Section */
+    .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .step {
+        @extend .card-base; /* Inherit card base styles */
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .step-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #00eaff;
+        margin-bottom: 15px;
+        text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    }
+
+    .step-icon {
+        font-size: 3.5rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+        text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+    }
+
+    .step h3 {
+        font-size: 1.8rem;
+        color: #e0e0e0;
+        margin-bottom: 10px;
+    }
+
+    .step p {
+        color: #c0c0c0;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    .project-card {
+        @extend .card-base;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 234, 255, 0.3);
+    }
+
+    .project-img {
+        height: 250px;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .project-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img img {
+        transform: scale(1.05);
+    }
+
+    .project-info {
+        padding: 25px;
+    }
+
+    .project-info h3 {
+        font-size: 1.8rem;
+        color: #00eaff;
+        margin-bottom: 10px;
+    }
+
+    .project-info p {
+        color: #c0c0c0;
+        margin-bottom: 8px;
+    }
+
+    .project-info strong {
+        color: #e0e0e0;
+    }
+
+    /* Services Section */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .service-card {
+        @extend .card-base;
+        text-align: center;
+    }
+
+    .service-icon {
+        font-size: 4rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+        text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+    }
+
+    .service-card h3 {
+        font-size: 1.8rem;
+        color: #e0e0e0;
+        margin-bottom: 10px;
+    }
+
+    .service-card p {
+        color: #c0c0c0;
+        margin-bottom: 20px;
+    }
+
+    .service-card .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    /* Team Section */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .team-member {
+        background-color: #1a1a3a; /* Darker blue for cards */
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 0 15px rgba(0, 234, 255, 0.2), inset 0 0 10px rgba(0, 234, 255, 0.1); /* Inner and outer glow */
+        border: 2px solid #00eaff; /* Stronger border */
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(0, 234, 255, 0.5), inset 0 0 15px rgba(0, 234, 255, 0.3);
+    }
+
+    .member-img {
+        width: 180px; /* Larger size */
+        height: 180px; /* Square for the frame effect */
+        border-radius: 15px; /* Slightly rounded corners for the frame */
+        overflow: hidden;
+        margin: 0 auto 20px;
+        border: 3px solid #00eaff; /* Inner border for the image frame */
+        box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #0a0a1a; /* Dark background for image area */
+    }
+
+    .member-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px; /* Slightly smaller border-radius for the image itself */
+    }
+
+    .member-info h4 {
+        font-size: 1.8rem;
+        color: #00eaff;
+        margin-bottom: 5px;
+    }
+
+    .member-info .position {
+        display: block;
+        color: #c0c0c0;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .member-info .member-email {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .member-info p {
+        color: #c0c0c0;
+        font-size: 1rem;
+    }
+
+    .team-member .btn {
+        margin-top: 20px; /* Space between text and button */
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+        background-color: #1a1a3a; /* Slightly lighter dark for contrast */
+        padding: 100px 0;
+    }
+
+    .testimonial-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .testimonial {
+        display: none;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #0a0a1a;
+        border: 1px solid rgba(0, 234, 255, 0.2);
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.1);
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .testimonial.active {
+        display: block;
+    }
+
+    .testimonial p {
+        font-size: 1.4rem;
+        font-style: italic;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+
+    .testimonial .client {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #00eaff;
+    }
+
+    .testimonial-nav {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-dot {
+        width: 12px;
+        height: 12px;
+        background-color: rgba(0, 234, 255, 0.3);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+        background-color: #00eaff;
+        box-shadow: 0 0 10px #00eaff;
+        transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats Section */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 30px;
+        text-align: center;
+    }
+
+    .stat-item {
+        @extend .card-base;
+        padding: 30px 20px;
+    }
+
+    .stat-item h3 {
+        font-size: 3.5rem;
+        color: #00eaff;
+        margin-bottom: 10px;
+        text-shadow: 0 0 15px rgba(0, 234, 255, 0.7);
+    }
+
+    .stat-item p {
+        font-size: 1.1rem;
+        color: #c0c0c0;
+    }
+
+    /* Blog Section */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .blog-card {
+        @extend .card-base;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 234, 255, 0.3);
+    }
+
+    .blog-img {
+        height: 220px;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .blog-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-img img {
+        transform: scale(1.05);
+    }
+
+    .blog-content {
+        padding: 25px;
+    }
+
+    .blog-content .blog-date {
+        display: block;
+        font-size: 0.9rem;
+        color: #888;
+        margin-bottom: 10px;
+    }
+
+    .blog-content h3 {
+        font-size: 1.6rem;
+        color: #00eaff;
+        margin-bottom: 10px;
+    }
+
+    .blog-content p {
+        color: #c0c0c0;
+        margin-bottom: 20px;
+    }
+
+    /* Investor Section */
+    .investor-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .investor-text {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    .investor-text h3 {
+        font-size: 2.2rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+    }
+
+    .investor-text p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        color: #c0c0c0;
+    }
+
+    .investor-text h4 {
+        font-size: 1.6rem;
+        color: #e0e0e0;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .investor-text ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+
+    .investor-text ul li {
+        margin-bottom: 10px;
+        color: #c0c0c0;
+        font-size: 1.05rem;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .investor-text ul li::before {
+        content: '\f00c'; /* Font Awesome check icon */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: #00eaff;
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
+
+    .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .investor-chart {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Contact Section */
+    .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .contact-info {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .contact-item {
+        @extend .card-base;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .contact-icon {
+        font-size: 2.5rem;
+        color: #00eaff;
+        text-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    }
+
+    .contact-item h3 {
+        font-size: 1.6rem;
+        color: #e0e0e0;
+        margin-bottom: 5px;
+    }
+
+    .contact-item p {
+        color: #c0c0c0;
+        font-size: 1.05rem;
+    }
+
+    .contact-form {
+        flex: 2;
+        min-width: 300px;
+        @extend .card-base;
+    }
+
+    .contact-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid rgba(0, 234, 255, 0.3);
+        border-radius: 8px;
+        background-color: #0a0a1a;
+        color: #e0e0e0;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+        border-color: #00eaff;
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        outline: none;
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .map-container {
+        margin-top: 60px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 234, 255, 0.2);
+        box-shadow: 0 0 25px rgba(0, 234, 255, 0.2);
+    }
+
+    /* Footer */
+    footer {
+        background-color: #0a0a1a;
+        padding: 50px 0 20px;
+        border-top: 1px solid rgba(0, 234, 255, 0.1);
+        color: #c0c0c0;
+    }
+
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .footer-logo h3 {
+        font-size: 2rem;
+        color: #e0e0e0;
+        margin-bottom: 10px;
+    }
+
+    .footer-logo span {
+        color: #00eaff;
+    }
+
+    .footer-logo p {
+        font-size: 0.95rem;
+    }
+
+    .footer-links h4 {
+        font-size: 1.4rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .footer-links h4::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 40px;
+        height: 2px;
+        background-color: #00eaff;
+    }
+
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+        color: #c0c0c0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-links ul li a:hover {
+        color: #00eaff;
+    }
+
+    .footer-links ul li i {
+        color: #00eaff;
+        margin-right: 10px;
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0, 234, 255, 0.05);
+        font-size: 0.9rem;
+        color: #888;
+    }
+
+    /* Modals */
     .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
@@ -78,22 +975,23 @@
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
-        background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        background-color: rgba(0,0,0,0.8); /* Black w/ more opacity */
         padding-top: 60px;
     }
 
     .modal-content {
-        background-color: #fefefe;
+        background-color: #1a1a3a; /* Dark background for modal content */
         margin: 5% auto; /* 5% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%; /* Could be more or less, depending on screen size */
-        max-width: 500px;
-        border-radius: 10px;
+        padding: 30px;
+        border: 1px solid rgba(0, 234, 255, 0.3);
+        width: 90%; /* Could be more or less, depending on screen size */
+        max-width: 900px; /* Increased max-width for modal */
+        border-radius: 12px;
         position: relative;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 8px 30px rgba(0, 234, 255, 0.4);
         animation-name: animatetop;
-        animation-duration: 0.4s
+        animation-duration: 0.4s;
+        color: #e0e0e0;
     }
 
     /* Add Animation */
@@ -103,122 +1001,264 @@
     }
 
     .close {
-        color: #aaa;
+        color: #00eaff;
         float: right;
-        font-size: 28px;
+        font-size: 32px;
         font-weight: bold;
         position: absolute;
-        right: 15px;
-        top: 10px;
+        right: 20px;
+        top: 15px;
+        cursor: pointer;
+        transition: color 0.3s ease;
     }
 
     .close:hover,
     .close:focus {
-        color: black;
+        color: #fff;
+        text-shadow: 0 0 10px #00eaff;
         text-decoration: none;
-        cursor: pointer;
     }
 
     .modal-content h2 {
         margin-top: 0;
-        color: #38a169;
-        font-size: 1.8rem;
+        color: #00eaff;
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .modal-content p {
+        color: #c0c0c0;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .modal-content .form-group,
     .modal-content input,
     .modal-content textarea,
     .modal-content select {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        padding: 15px;
+        border: 1px solid rgba(0, 234, 255, 0.3);
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: #0a0a1a;
+        color: #e0e0e0;
+        font-size: 1rem;
+    }
+
+    .modal-content input::placeholder,
+    .modal-content textarea::placeholder {
+        color: #888;
     }
 
     .modal-content .btn {
         width: 100%;
-        padding: 12px;
-        background-color: #38a169;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
+        padding: 15px;
+        font-size: 1.1rem;
     }
 
-    .modal-content .btn:hover {
-        background-color: #2f855a;
+    /* Modal Specific Styles for Team Viewer */
+    .modal-header {
+        display: flex;
+        flex-direction: column; /* Stack on mobile, adjust for desktop */
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(0, 234, 255, 0.2);
     }
 
-    /* General responsive adjustments for the main layout if needed */
-    .projects-grid, .services-grid, .team-grid, .blog-grid, .stats-grid {
-        display: grid;
-        gap: 20px;
-    }
     @media (min-width: 768px) {
-        .projects-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        .services-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        .team-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-        .blog-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        .stats-grid {
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        .modal-header {
+            flex-direction: row;
+            text-align: left;
+            align-items: flex-start;
         }
     }
-    /* Ensure image cards in custom-gallery are responsive */
-    .custom-gallery .image-card img {
+
+    .modal-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 15px; /* Square with rounded corners */
+        overflow: hidden;
+        margin: 0 auto 20px; /* Center on mobile */
+        border: 3px solid #00eaff;
+        box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        background-color: #0a0a1a;
+        flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+        .modal-img {
+            margin-right: 40px;
+            margin-bottom: 0;
+        }
+    }
+
+    .modal-img img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Ensures images cover the area without distortion */
+        object-fit: cover;
+        border-radius: 12px;
     }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-.logo img {
-  height: 50px;
-}
+    .modal-info {
+        flex: 1;
+        padding-top: 10px;
+        text-align: center; /* Center text on mobile */
+    }
 
-.logo-text h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-}
+    @media (min-width: 768px) {
+        .modal-info {
+            text-align: left;
+        }
+    }
 
-.logo-text span {
-  color: #28a745; /* or your brand color */
-}
+    .modal-info h2 {
+        font-size: 2.5rem;
+        color: #00eaff;
+        margin-bottom: 10px;
+    }
+
+    .modal-info .designation {
+        font-size: 1.2rem;
+        color: #c0c0c0;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .modal-info .email {
+        font-size: 1rem;
+        color: #888;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .modal-info p {
+        color: #e0e0e0;
+        line-height: 1.7;
+        font-size: 1.05rem;
+    }
+
+    .modal-section {
+        margin-bottom: 30px;
+    }
+
+    .modal-section h3 {
+        font-size: 1.8rem;
+        color: #00eaff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 234, 255, 0.1);
+    }
+
+    .modal-section h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 60px;
+        height: 2px;
+        background-color: #00eaff;
+        box-shadow: 0 0 8px #00eaff;
+    }
+
+    .modal-section p {
+        color: #c0c0c0;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    .modal-section .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 15px;
+    }
+
+    .modal-section .project-card {
+        background-color: #0a0a1a; /* Darker background for nested cards */
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 234, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 234, 255, 0.1);
+    }
+
+    .modal-section .project-card h4 {
+        color: #00eaff;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .modal-section .project-card p {
+        color: #c0c0c0;
+        font-size: 0.95rem;
+    }
+
+    ul.competencies {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    ul.competencies li {
+        background-color: rgba(0, 234, 255, 0.1); /* Light blue background for tags */
+        color: #00eaff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(0, 234, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    ul.competencies li:hover {
+        background-color: rgba(0, 234, 255, 0.2);
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+    }
+
+
+    /* Animation on scroll */
+    .animate {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .animate.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .animate.delay-1 { transition-delay: 0.1s; }
+    .animate.delay-2 { transition-delay: 0.2s; }
+    .animate.delay-3 { transition-delay: 0.3s; }
+    .animate.delay-4 { transition-delay: 0.4s; }
+    .animate.delay-5 { transition-delay: 0.5s; }
+    .animate.delay-6 { transition-delay: 0.6s; }
+
   </style>
  </head>
  <body>
- 
-  
   <!-- Header -->
   <header>
    <div class="container header-container">
-  <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-    <a href="index.html">
-      <img src="Shreeja_LOGO.png" alt="Shreeja Biotech Logo" style="height: 50px;">
-    </a>
-    <div class="logo-text">
-      <h1 style="margin: 0;">
-        SHREEJA <span style="color: #28a745;">BIO-TECH</span>
+    <div class="logo">
+     <a href="index.html">
+      <img alt="Shreeja Biotech Logo" src="Shreeja_LOGO.png" style="height: 50px;"/>
+     </a>
+     <div class="logo-text">
+      <h1>
+       SHREEJA
+       <span>
+        BIO-TECH
+       </span>
       </h1>
+     </div>
     </div>
-  </div>
     <div class="mobile-toggle" id="mobileToggle">
      <i class="fas fa-bars">
      </i>
@@ -266,14 +1306,9 @@
        </a>
       </li>
       <li>
-       <a href="#contact">
-        Contact
+       <a class="btn" href="biogas_plant_calculator.html">
+        Project Calculator
        </a>
-      </li>
-      <li>
-        <a class="btn" href="biogas_plant_calculator.html">
-            Project Calculator
-        </a>
       </li>
      </ul>
     </nav>
@@ -284,7 +1319,7 @@
    <div class="container">
     <div class="hero-content">
      <h1>
-      Powering Tomorrow, Naturally
+      Innovating Energy, Advancing Solutions
      </h1>
      <p>
       Shreeja Biotech is a pioneer in Bio-CNG production from organic waste, transforming environmental challenges into sustainable energy solutions for a greener future.
@@ -314,10 +1349,10 @@
        Leading the Renewable Energy Revolution
       </h2>
       <p>
-       Founded in Surat, Gujarat, Shreeja Biotech specializes in converting organic waste into clean, renewable Bio-CNG. With over a decade of experience, we've pioneered innovative technologies that transform agricultural, municipal, and industrial waste into valuable energy resources.
+       Founded in Surat, Gujarat, Shreeja Biotech is a leading renewable energy company specializing in Waste-to-Energy (WTE), Bio-CNG (CBG) plant designing, and large-scale turnkey project execution. With a strong focus on cutting-edge biogas technology, anaerobic digestion, and carbon reduction strategies, we provide end-to-end solutions for industries, municipalities, and private enterprises looking to transition towards sustainable energy sources.
       </p>
       <p>
-       Our mission is to reduce India's carbon footprint while providing cost-effective energy solutions that benefit communities, industries, and the environment.
+       Our expertise in high-efficiency biogas plants, advanced feedstock preparation, and hybrid gas purification systems enables us to deliver innovative solutions that maximize energy recovery while reducing environmental impact.
       </p>
       <div class="mission-vision">
        <div class="mission animate delay-1">
@@ -345,8 +1380,7 @@
     </div>
    </div>
   </section>
- 
- <!-- Process Section -->
+  <!-- Process Section -->
   <section class="process-section" id="process">
    <div class="container">
     <div class="section-title">
@@ -413,216 +1447,12 @@
       </h3>
       <p>
        Our hybrid systems remove impurities to achieve 98% methane purity for Bio-CNG.
+       <a class="btn" href="carbon-credit.html">
+        Learn More
+       </a>
       </p>
      </div>
-     <div class="step animate delay-4">
-      <div class="step-number">
-       5
-      </div>
-      <div class="step-icon">
-       <i class="fas fa-gas-pump">
-       </i>
-      </div>
-      <h3>
-       Compression &amp; Storage
-      </h3>
-      <p>
-       Purified gas is compressed to 250 bar and stored in specialized cylinders.
-      </p>
-     </div>
-     <div class="step animate delay-1">
-      <div class="step-number">
-       6
-      </div>
-      <div class="step-icon">
-       <i class="fas fa-truck">
-       </i>
-      </div>
-      <h3>
-       Distribution
-      </h3>
-      <p>
-       Bio-CNG is distributed to industrial clients, CNG stations, and commercial users.
-      </p>
-     </div>
-    </div>
-   </div>
-  </section>
-  <!-- Projects Section -->
-  <section class="projects" id="projects">
-   <div class="container">
-    <div class="section-title">
-     <h2>
-      Our Featured Projects
-     </h2>
-    </div>
-    <div class="projects-grid">
-     <div class="project-card animate">
-      <div class="project-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="Project 01" src="digester_01.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Image+Not+Found';"/>
-      </div>
-      <div class="project-info">
-       <h3>
-        Municipal Waste Project
-       </h3>
-       <p>
-        Converting 50 tons/day of municipal solid waste into Bio-CNG for city transport
-       </p>
-       <p>
-        <strong>
-         Capacity:
-        </strong>
-        1500 kg Bio-CNG/day
-       </p>
-       <p>
-        <strong>
-         Impact:
-        </strong>
-        Reduces 15,000 tons CO2/year
-       </p>
-      </div>
-     </div>
-     <div class="project-card animate delay-1">
-      <div class="project-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="Project 02" src="digester02.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Image+Not+Found';"/>
-      </div>
-      <div class="project-info">
-       <h3>
-        Agricultural Waste Plant
-       </h3>
-       <p>
-        Processing farm waste from 200+ farms into clean energy and organic fertilizer
-       </p>
-       <p>
-        <strong>
-         Capacity:
-        </strong>
-        100 tons/day agricultural waste
-       </p>
-       <p>
-        <strong>
-         Output:
-        </strong>
-        5,000 kg Bio-CNG + 10 tons fertilizer/day
-       </p>
-      </div>
-     </div>
-     <div class="project-card animate delay-2">
-      <div class="project-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="Project 03" src="digester03.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Image+Not+Found';"/>
-      </div>
-      <div class="project-info">
-       <h3>
-        Food Processing Unit
-       </h3>
-       <p>
-        Converting food industry waste into Bio-CNG for industrial heating applications
-       </p>
-       <p>
-        <strong>
-         Technology:
-        </strong>
-        Modified CSTR digesters
-       </p>
-       <p>
-        <strong>
-         Efficiency:
-        </strong>
-        85% waste-to-energy conversion
-       </p>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section>
-  <!-- Services Section -->
-  <section class="services" id="services">
-   <div class="container">
-    <div class="section-title">
-     <h2>
-      Products &amp; Services
-     </h2>
-    </div>
-    <div class="services-grid">
-     <div class="service-card animate">
-      <div class="service-icon">
-       <i class="fas fa-gas-pump">
-       </i>
-      </div>
-      <h3>
-       Bio-CNG Production
-      </h3>
-      <p>
-       High-purity compressed biogas for industrial, commercial, and transportation use.
-      </p>
-      <a class="btn" href="bio-cng.html">
-       Learn More
-      </a>
-     </div>
-     <div class="service-card animate delay-1">
-      <div class="service-icon">
-       <i class="fas fa-seedling">
-       </i>
-      </div>
-      <h3>
-       Organic Fertilizers
-      </h3>
-      <p>
-       Nutrient-rich fertilizers from digested slurry, improving soil health and crop yields.
-      </p>
-      <a class="btn" href="fertilizers.html">
-       Learn More
-      </a>
-     </div>
-     <div class="service-card animate delay-2">
-      <div class="service-icon">
-       <i class="fas fa-hard-hat">
-       </i>
-      </div>
-      <h3>
-       Turnkey Plant Setup
-      </h3>
-      <p>
-       End-to-end solutions from feasibility studies to commissioning and maintenance.
-      </p>
-      <a class="btn" href="turnkey.html">
-       Learn More
-      </a>
-     </div>
-     <div class="service-card animate delay-3">
-      <div class="service-icon">
-       <i class="fas fa-cogs">
-       </i>
-      </div>
-      <h3>
-       Technology Consulting
-      </h3>
-      <p>
-       Expert guidance on biogas technology selection, optimization, and integration.
-      </p>
-      <a class="btn" href="consulting.html">
-       Learn More
-      </a>
-     </div>
-     <div class="service-card animate delay-1">
-      <div class="service-icon">
-       <i class="fas fa-chart-line">
-       </i>
-      </div>
-      <h3>
-       Carbon Credit Services
-      </h3>
-      <p>
-       Assistance in registering, monitoring, and trading carbon credits from biogas projects.
-      </p>
-      <a class="btn" href="carbon-credit.html">
-       Learn More
-      </a>
-     </div>
-     <div class="service-card animate delay-2">
+     <div class="service-card animate delay-5">
       <div class="service-icon">
        <i class="fas fa-vial">
        </i>
@@ -631,7 +1461,7 @@
        Feedstock Analysis
       </h3>
       <p>
-       Comprehensive waste characterization to determine biogas potential and plant design.
+       Comprehensive waste characterization to determine biogas potential and plant design, handling various feedstock variability.
       </p>
       <a class="btn" href="feedstock.html">
        Learn More
@@ -640,56 +1470,180 @@
     </div>
    </div>
   </section>
- <!-- Team Section -->
-<section class="team" id="team">
-  <div class="container">
+  <!-- Team Section -->
+  <section class="team" id="team">
+   <div class="container">
     <div class="section-title">
-      <h2>Our Leadership Team</h2>
+     <h2>
+      Our Leadership Team
+     </h2>
     </div>
     <div class="team-grid">
-      <!-- Pankaj Khatri -->
-      <div class="team-member animate">
-        <div class="member-img">
-          <img alt="Pankaj Hemant Khatri" src="Pankaj_Khatri.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/333333?text=Pankaj+Khatri';"/>
-        </div>
-        <div class="member-info">
-          <h4>Pankaj Hemant Khatri</h4>
-          <span class="position">Founder &amp; Partner</span>
-          <p class="member-email">pankaj_khatri@shreejabiotech.shop</p>
-          <p>Visionary leader with 15+ years in bio-energy technologies. Pioneer in India's bio-CNG movement.</p>
-        </div>
+     <!-- Pankaj Hemant Khatri -->
+     <div class="team-member animate">
+      <div class="member-img">
+       <img alt="Pankaj Hemant Khatri" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Pankaj+Khatri';" src="Pankaj_Khatri.jpg"/>
       </div>
-
-      <!-- Pooja Khatri -->
-      <div class="team-member animate delay-1">
-        <div class="member-img">
-          <img alt="Pooja Pankaj Khatri" src="pooja_Khatri.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/333333?text=Pooja+Khatri';"/>
-        </div>
-        <div class="member-info">
-          <h4>Pooja Pankaj Khatri</h4>
-          <span class="position">Partner &amp; Finance Manager</span>
-          <p class="member-email">pooja.khatri@shreejabiotech.shop</p>
-          <p>Seasoned finance professional with expertise in project finance and strategic planning.</p>
-        </div>
+      <div class="member-info">
+       <h4>
+        Pankaj Hemant Khatri
+       </h4>
+       <span class="position">
+        Founder &amp; Partner
+       </span>
+       <p class="member-email">
+        khatrip.009@gmail.com
+       </p>
+       <p>
+        Visionary leader with 15+ years in bio-energy technologies. Pioneer in India's bio-CNG movement and semi-cryogenic Bio-CNG upgradation system.
+       </p>
+       <button class="btn see-more" data-id="1">
+        See More...
+       </button>
       </div>
-
-      <!-- Hemant Khatri -->
-      <div class="team-member animate delay-2">
-        <div class="member-img">
-          <img alt="Hemant Khatri" src="hemantkhatri.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/333333?text=Hemant+Khatri';"/>
-        </div>
-        <div class="member-info">
-          <h4>Mr. Hemant Khatri</h4>
-          <span class="position">Senior HR Manager</span>
-          <p class="member-email">hemant_khatri@shreejabiotech.shop</p>
-          <p>With 25+ years of experience in human resource development, Hemant brings deep operational insight and team-building expertise to Shreeja Biotech.</p>
-        </div>
+     </div>
+     <!-- Pooja Pankaj Khatri -->
+     <div class="team-member animate delay-1">
+      <div class="member-img">
+       <img alt="Pooja Pankaj Khatri" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Pooja+Khatri';" src="pooja_Khatri.jpg"/>
       </div>
-
+      <div class="member-info">
+       <h4>
+        Pooja Pankaj Khatri
+       </h4>
+       <span class="position">
+        Partner &amp; Finance Manager
+       </span>
+       <p class="member-email">
+        pooja.khatri@shreejabiotech.shop
+       </p>
+       <p>
+        Seasoned finance and business management professional with 7+ years of experience in financial planning, project finance, and operational control.
+       </p>
+       <button class="btn see-more" data-id="2">
+        See More...
+       </button>
+      </div>
+     </div>
+     <!-- Mr. Hemant Khatri -->
+     <div class="team-member animate delay-2">
+      <div class="member-img">
+       <img alt="Mr. Hemant Khatri" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Hemant+Khatri';" src="hemantkhatri.jpg"/>
+      </div>
+      <div class="member-info">
+       <h4>
+        Mr. Hemant Khatri
+       </h4>
+       <span class="position">
+        Senior HR Manager
+       </span>
+       <p class="member-email">
+        hemant_khatri@shreejabiotech.shop
+       </p>
+       <p>
+        Responsible for human capital strategy, workforce operations, and cultural alignment across technical, operational, and field teams.
+       </p>
+       <button class="btn see-more" data-id="3">
+        See More...
+       </button>
+      </div>
+     </div>
+     <!-- Anand Kapadiya -->
+     <div class="team-member animate delay-3">
+      <div class="member-img">
+       <img alt="Anand Kapadiya" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Anand+Kapadiya';" src="anand_kapadiya.jpg"/>
+      </div>
+      <div class="member-info">
+       <h4>
+        Anand Kapadiya
+       </h4>
+       <span class="position">
+        Head - Plant Design &amp; Implementation
+       </span>
+       <p class="member-email">
+        anand.kapadiya@shreejabiotech.shop
+       </p>
+       <p>
+        Veteran Mechanical Engineer with 20+ years of experience in conceptualizing, designing, and implementing large-scale waste-to-energy and Bio-CNG projects.
+       </p>
+       <button class="btn see-more" data-id="5">
+        See More...
+       </button>
+      </div>
+     </div>
+     <!-- Harsh Patel -->
+     <div class="team-member animate delay-4">
+      <div class="member-img">
+       <img alt="Harsh Patel" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Harsh+Patel';" src="harsh_patel.jpg"/>
+      </div>
+      <div class="member-info">
+       <h4>
+        Harsh Patel
+       </h4>
+       <span class="position">
+        Structural Engineer
+       </span>
+       <p class="member-email">
+        harsh.patel@shreejabiotech.shop
+       </p>
+       <p>
+        Highly skilled Structural Engineer with 5+ years of experience in civil and structural design, analysis, and execution for industrial infrastructure.
+       </p>
+       <button class="btn see-more" data-id="6">
+        See More...
+       </button>
+      </div>
+     </div>
+     
+     <!-- Vishal Babubhai Kaku -->
+     <div class="team-member animate delay-6">
+      <div class="member-img">
+       <img alt="Vishal Babubhai Kaku" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Vishal+Kaku';" src="vishal_kaku.jpg"/>
+      </div>
+      <div class="member-info">
+       <h4>
+        Vishal Babubhai Kaku
+       </h4>
+       <span class="position">
+        Senior Project Manager
+       </span>
+       <p class="member-email">
+        vishal.kaku@shreejabiotech.shop
+       </p>
+       <p>
+        Dedicated Project Manager with 4+ years of diverse experience managing projects across renewable energy, infrastructure, and utility sectors.
+       </p>
+       <button class="btn see-more" data-id="4">
+        See More...
+       </button>
+      </div>
+     </div>
+     <!-- Satish Chikodi - Added from team.html -->
+     <div class="team-member animate delay-7">
+      <div class="member-img">
+       <img alt="Satish Chikodi" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=Satish+Chikodi';" src="satish_chikodi.jpg"/>
+      </div>
+      <div class="member-info">
+       <h4>
+        Satish Chikodi
+       </h4>
+       <span class="position">
+        Sr. Manager - Business Development
+       </span>
+       <p class="member-email">
+        chikkodisatish@gmail.com
+       </p>
+       <p>
+        Senior management professional with 19+ years in contracts management, project marketing, and business development in the energy sector.
+       </p>
+       <button class="btn see-more" data-id="8">
+        See More...
+       </button>
+      </div>
+     </div>
     </div>
-  </div>
-</section>
-
+   </div>
+  </section>
   <!-- Testimonials Section -->
   <section class="testimonials">
    <div class="container">
@@ -723,20 +1677,23 @@
        - Vikram Patel, Clean Energy Investor
       </div>
      </div>
-	<div class="testimonial">
+     <div class="testimonial">
       <p>
-       "The End to End Guidence with all kind of support with Technology is Amazing by the Team of Shreeja BioTech"
+       "The End to End Guidance with all kind of support with Technology is Amazing by the Team of Shreeja BioTech"
       </p>
       <div class="client">
        - Mr. Manoj Yadav, Ex. Minister
       </div>
      </div>
      <div class="testimonial-nav">
-  <div class="nav-dot active" data-index="0"></div>
-  <div class="nav-dot" data-index="1"></div>
-  <div class="nav-dot" data-index="2"></div>
-  <div class="nav-dot" data-index="3"></div> <!-- ✅ New dot added -->
-</div>
+      <div class="nav-dot active" data-index="0">
+      </div>
+      <div class="nav-dot" data-index="1">
+      </div>
+      <div class="nav-dot" data-index="2">
+      </div>
+      <div class="nav-dot" data-index="3">
+      </div>
      </div>
     </div>
    </div>
@@ -771,13 +1728,13 @@
      </div>
      <div class="stat-item animate delay-3">
       <h3>
-       16.50 Cr
+       ₹16.50 Cr
       </h3>
       <p>
-       Largest Project
+       Largest Project Value
       </p>
      </div>
-     <div class="stat-item animate delay-1">
+     <div class="stat-item animate delay-4">
       <h3>
        120K+
       </h3>
@@ -785,7 +1742,7 @@
        Tons Waste Processed
       </p>
      </div>
-     <div class="stat-item animate delay-2">
+     <div class="stat-item animate delay-5">
       <h3>
        25K+
       </h3>
@@ -807,8 +1764,7 @@
     <div class="blog-grid">
      <div class="blog-card animate">
       <div class="blog-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="blog01" src="biogas_plant.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Blog+Image+1';"/>
+       <img alt="blog01" onerror="this.onerror=null;this.src='https://placehold.co/400x250/1a1a3a/00eaff?text=New+MNRE+Subsidies';" src="biogas_plant.jpg"/>
       </div>
       <div class="blog-content">
        <span class="blog-date">
@@ -827,8 +1783,7 @@
      </div>
      <div class="blog-card animate delay-1">
       <div class="blog-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="blog02" src="animal_house.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Blog+Image+2';"/>
+       <img alt="blog02" onerror="this.onerror=null;this.src='https://placehold.co/400x250/1a1a3a/00eaff?text=Transforming+Agriculture';" src="animal_house.jpg"/>
       </div>
       <div class="blog-content">
        <span class="blog-date">
@@ -847,8 +1802,7 @@
      </div>
      <div class="blog-card animate delay-2">
       <div class="blog-img">
-       <!-- Added onerror for image fallback -->
-       <img alt="blog02" src="productionline.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x250/cccccc/333333?text=Blog+Image+3';"/>
+       <img alt="blog02" onerror="this.onerror=null;this.src='https://placehold.co/400x250/1a1a3a/00eaff?text=Biogas+Purification';" src="productionline.jpg"/>
       </div>
       <div class="blog-content">
        <span class="blog-date">
@@ -892,22 +1846,23 @@
         Proven technology with 15+ years of operational experience
        </li>
        <li>
-        Favorable regulatory environment with government subsidies
+        Favorable regulatory environment with government subsidies (MNRE, NABARD, CGTMSE-based financing frameworks)
        </li>
        <li>
-        Strong revenue streams from Bio-CNG sales and carbon credits
+        Strong revenue streams from Bio-CNG sales, CO₂ recovery and resale, and organic fertilizer production.
        </li>
        <li>
-        Scalable business model with multiple expansion projects
+        Scalable business model with multiple expansion projects and strong international presence in Southeast Asia.
        </li>
        <li>
-        Experienced management team with technical and financial expertise
+        Experienced management team with technical and financial expertise, ensuring smooth execution from feasibility to commissioning.
        </li>
       </ul>
-     <a class="btn download-btn" href="Company_Profile.pdf" target="_blank">
-  <i class="fas fa-download"></i>
-  Download Investor Deck
-</a>
+      <a class="btn download-btn" download="" href="Company_Profile.pdf">
+       <i class="fas fa-download">
+       </i>
+       Download Investor Deck
+      </a>
      </div>
      <div class="investor-chart animate delay-1">
       <canvas height="400" id="investmentChart" width="400">
@@ -932,7 +1887,8 @@
      <input name="_subject" type="hidden" value="Investor Deck Request"/>
      <input name="name" placeholder="Your Name" required="" type="text"/>
      <input name="email" placeholder="Your Email" required="" type="email"/>
-     <textarea name="message" placeholder="Tell us why you're interested" required=""></textarea>
+     <textarea name="message" placeholder="Tell us why you're interested" required="">
+     </textarea>
      <button class="btn" type="submit">
       Submit &amp; Download
      </button>
@@ -989,7 +1945,7 @@
         <p>
          info@shreejabiotech.shop
         </p>
-               </div>
+       </div>
       </div>
       <div class="contact-item animate delay-3">
        <div class="contact-icon">
@@ -1051,7 +2007,8 @@
         </select>
        </div>
        <div class="form-group">
-        <textarea name="message" placeholder="Your Message" required=""></textarea>
+        <textarea name="message" placeholder="Your Message" required="">
+        </textarea>
        </div>
        <button class="btn" type="submit">
         Send Message
@@ -1059,16 +2016,10 @@
       </form>
      </div>
     </div>
-   <div class="map-container" style="position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 ratio */ height: 0; overflow: hidden; border-radius: 10px;">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.528370703524!2d72.78014167508611!3d21.21088658048438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04db1c12da7bb%3A0x64f5c7f39a833498!2sV%20Square!5e0!3m2!1sen!2sin!4v1751872099581!5m2!1sen!2sin" 
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
-    allowfullscreen="" 
-    loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
-
+    <div class="map-container" style="position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 ratio */ height: 0; overflow: hidden; border-radius: 10px;">
+     <iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.528370703524!2d72.78014167508611!3d21.21088658048438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04db1c12da7bb%3A0x64f5c7f39a833498!2sV%20Square!5e0!3m2!1sen!2sin!4v1751872099581!5m2!1sen!2sin" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+     </iframe>
+    </div>
    </div>
   </section>
   <!-- Footer -->
@@ -1084,9 +2035,8 @@
         </span>
        </h3>
        <p>
-        Powering Tomorrow, Naturally
+        Innovating Energy, Advancing Solutions
        </p>
-       
       </div>
      </div>
      <div class="footer-links">
@@ -1142,13 +2092,13 @@
         </a>
        </li>
        <li>
-        <a href="#">
-         Plant Setup
+        <a href="turnkey.html">
+         Turnkey Plant Setup
         </a>
        </li>
        <li>
-        <a href="#">
-         Consulting Services
+        <a href="consulting.html">
+         Technology Consulting
         </a>
        </li>
        <li>
@@ -1171,7 +2121,7 @@
        <li>
         <i class="fas fa-map-marker-alt">
         </i>
-        372, V Square, Surat - 395005
+        372, V Square, Palanpur jakatnaka, Surat - 395005
        </li>
        <li>
         <i class="fas fa-phone">
@@ -1199,245 +2149,484 @@
    </div>
   </footer>
   <script>
-   // Mobile Navigation Toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.querySelector('nav ul');
-        
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            // Toggle between fa-bars and fa-times icons
-            const icon = mobileToggle.querySelector('i');
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close mobile menu when a link is clicked (for smoother UX)
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    mobileToggle.querySelector('i').classList.remove('fa-times');
-                    mobileToggle.querySelector('i').classList.add('fa-bars');
+    // Team data - consolidated and enhanced
+    const teamData = [
+        {
+            id: 1,
+            name: "Pankaj Hemant Khatri",
+            designation: "Founder & Partner",
+            email: "khatrip.009@gmail.com",
+            image: "Pankaj_Khatri.jpg",
+            experience: "Visionary leader with 15+ years of experience in renewable energy innovation. Pioneer in India's bio-CNG movement, blending science, sustainability, and engineering. Graduate in English and Business Administration with progressive leadership experience.",
+            role: "Responsible for strategic direction, innovation, and international expansion. Leads R&D for next-generation waste-to-energy solutions. Directly involved in developing India's first semi-cryogenic Bio-CNG upgradation system (patent-pending). Leads bank finance proposals and government grant applications under MNRE. Establishes R&D workflows for Napier Grass slurry optimization and CO2 commercialization. Creates strategic partnerships.",
+            projects: [
+                {
+                    name: "Semi-Cryogenic Bio-CNG System",
+                    desc: "Developed India's first patent-pending semi-cryogenic biogas upgradation technology achieving 98% methane purity, opening scalable avenues for biogas purification."
+                },
+                {
+                    name: "Malaysia Biogas Plant (2.4 MWe)",
+                    desc: "Led technical consultancy for a 2.4 MWe biogas plant in Raub, Pahang, Malaysia, using CSTR-MBR technology for Palm Oil Mill Effluent. Project value ₹2.55 Crore."
                 }
-            });
-        });
+            ],
+            competencies: [
+                "Bio-CNG Plant Design & Finance",
+                "Thermochemical & Anaerobic Digestion",
+                "Government Liaisoning & Financial Coordination",
+                "Semi-Cryogenic Gas Separation & CO₂ Recovery",
+                "Industrial Automation & Engineering Oversight",
+                "Legal Structuring & Technical Tender Documentation",
+                "International Project Execution"
+            ]
+        },
+        {
+            id: 2,
+            name: "Pooja Pankaj Khatri",
+            designation: "Partner & Finance Manager",
+            email: "pooja.khatri@shreejabiotech.shop",
+            image: "pooja_Khatri.jpg",
+            experience: "Seasoned professional in advanced statistics and business management with 7+ years of experience in teaching, administration, and business leadership. Holds M.Com with specialization in advanced statistics.",
+            role: "Oversees entire company operations, ensuring smooth execution of projects, financial planning, and workforce management. Responsible for corporate financial planning, budget allocation, project finance, loan documentation, cost analysis, and resource optimization. Leads discussions with lenders, auditors, and legal advisors.",
+            projects: [
+                {
+                    name: "Financial Strategy & Compliance",
+                    desc: "Ensures all projects are financially sound, administratively robust, and organizationally aligned for long-term success. Streamlines budgets and allocates capital efficiently."
+                },
+                {
+                    name: "Grant & Fund Management",
+                    desc: "Oversees regulatory compliance, grant utilization, and fund disbursal tracking for various government schemes."
+                }
+            ],
+            competencies: [
+                "Corporate Financial Planning & Budget Allocation",
+                "Project Finance & Loan Documentation",
+                "Cost Analysis & Resource Optimization",
+                "Team Leadership & HR Oversight",
+                "Legal Documentation & Vendor Management",
+                "Strategic Forecasting & KPI Evaluation",
+                "Stakeholder Communication & Bank Relations"
+            ]
+        },
+        {
+            id: 3,
+            name: "Mr. Hemant Khatri",
+            designation: "Senior HR Manager",
+            email: "hemant_khatri@shreejabiotech.shop",
+            image: "hemantkhatri.jpg",
+            experience: "HR veteran with over 25 years of experience in human resource development, talent acquisition, organizational development, and workforce management across multiple industries.",
+            role: "Directly reports to the CEO, overseeing human capital strategy, workforce operations, and cultural alignment. Key responsibilities include talent acquisition for technical and field staff, designing HR policies, onboarding & training workflows, statutory HR compliance, and workforce grievance handling.",
+            projects: [
+                {
+                    name: "Talent Acquisition & Retention",
+                    desc: "Successfully implemented strategies to attract and retain top talent in the renewable energy sector, reducing turnover by 15%."
+                },
+                {
+                    name: "HR Policy Development",
+                    desc: "Developed and implemented comprehensive HR policies and procedures, ensuring compliance with Indian labor laws and fostering a positive work environment."
+                }
+            ],
+            competencies: [
+                "Talent Acquisition & Management",
+                "HR Policy & Compliance",
+                "Employee Relations & Grievance Handling",
+                "Workforce Planning & Analytics",
+                "Training & Development",
+                "Organizational Culture Building"
+            ]
+        },
+        {
+            id: 4,
+            name: "Vishal Babubhai Kaku",
+            designation: "Senior Project Manager",
+            email: "vishal.kaku@shreejabiotech.shop",
+            image: "vishal_kaku.jpg",
+            experience: "Dedicated Project Manager with a background in commerce and over 4 years of diverse experience managing projects across renewable energy, infrastructure, and utility sectors. Bachelor of Commerce (B.Com) graduate.",
+            role: "Plays a key leadership role in managing the implementation and operational control of Bio-CNG and other green energy projects. Responsible for daily progress monitoring, team activities, vendor deliveries, quality assurance, and coordination with government departments and compliance agencies. Manages budget monitoring and inventory tracking.",
+            projects: [
+                {
+                    name: "Bio-CNG Plant Implementation",
+                    desc: "Successfully managed the turnkey implementation of multiple Bio-CNG plants, ensuring on-time and within-budget delivery."
+                },
+                {
+                    name: "Government Liaison & Compliance",
+                    desc: "Facilitated seamless coordination with government bodies and ensured all projects adhered to environmental and regulatory compliance."
+                }
+            ],
+            competencies: [
+                "Project Planning & Execution Control",
+                "Renewable Energy Infrastructure Supervision",
+                "Supply Chain & Vendor Management",
+                "Stakeholder Coordination & Documentation",
+                "Financial Forecasting & Budget Adherence",
+                "Compliance Handling & Government Liaisoning",
+                "Turnkey Project Delivery & Site Auditing"
+            ]
+        },
+        {
+            id: 5,
+            name: "Anand Kapadiya",
+            designation: "Head - Plant Design & Implementation",
+            email: "anand.kapadiya@shreejabiotech.shop",
+            image: "anand_kapadiya.jpg",
+            experience: "Veteran Mechanical Engineer with over 20 years of hands-on experience in conceptualizing, designing, and implementing large-scale waste-to-energy and Bio-CNG projects across India and Southeast Asia.",
+            role: "Leads a multidisciplinary team of engineers and technicians to deliver technically advanced and economically optimized Bio-CNG projects. Specializes in Semi-Cryogenic Gas Upgradation and CO₂ Recovery, Mechanical Layouts, P&ID, Utility Design, and 3D Plant Modeling. Conducts Project Feasibility Assessment and CAPEX Planning.",
+            projects: [
+                {
+                    name: "International Biogas Plant Design",
+                    desc: "Designed and oversaw implementation of a 2.4 MWe biogas plant in Malaysia, demonstrating cross-border technical collaboration."
+                },
+                {
+                    name: "Advanced Biogas Purification",
+                    desc: "Pioneered the integration of semi-cryogenic technology for enhanced biogas purification and CO2 recovery in Indian projects."
+                }
+            ],
+            competencies: [
+                "Process Design & Engineering (Bio-CNG/Biogas)",
+                "Semi-Cryogenic Gas Separation & CO₂ Recovery",
+                "Mechanical Layouts, P&ID, 3D Plant Modeling",
+                "Equipment Sizing & Process Optimization",
+                "Project Feasibility Assessment & CAPEX Planning",
+                "End-to-End Plant Commissioning & Technical Audit",
+                "Cross-border Technical Collaboration"
+            ]
+        },
+        {
+            id: 6,
+            name: "Harsh Patel",
+            designation: "Structural Engineer",
+            email: "harsh.patel@shreejabiotech.shop",
+            image: "harsh_patel.jpg",
+            experience: "Highly skilled and dynamic Structural Engineer with over five years of professional experience in civil and structural design, analysis, and execution. Based in Surat, Gujarat.",
+            role: "Officially associated with Shreeja Biotech as the Lead Structural Engineer, responsible for overseeing structural planning, designing, analysis, and execution of Bio-CNG plant infrastructure. Focuses on sustainable engineering, cost-efficient construction, and adherence to international codes and safety standards.",
+            projects: [
+                {
+                    name: "Bio-CNG Plant Structural Design",
+                    desc: "Designed and supervised the structural integrity of multiple large-scale Bio-CNG plant infrastructures, ensuring durability and safety under operational loads."
+                },
+                {
+                    name: "Earthquake-Resistant Structures",
+                    desc: "Implemented advanced design principles for earthquake-resistant and wind-load-tolerant structures, enhancing plant resilience."
+                }
+            ],
+            competencies: [
+                "Structural Design (RCC, Steel, Composite)",
+                "AutoCAD, STAAD.Pro, ETABS, Revit Structures",
+                "Load Calculations & IS Code Compliance",
+                "Soil & Foundation Studies",
+                "Pre-Engineered Building (PEB) Structures",
+                "Earthquake-resistant & Wind-load-tolerant Design",
+                "Cost Estimation & Quantity Surveying (BOQ)",
+                "Project Coordination with Civil & MEP Teams"
+            ]
+        },
+        {
+            id: 7,
+            name: "Dhanesh Haresh Poriya",
+            designation: "Civil Engineer",
+            email: "dhanesh.poriya@shreejabiotech.shop",
+            image: "dhanesh_poriya.jpg",
+            experience: "Experienced and resourceful Civil Engineer with over six years of professional expertise in construction management, site execution, infrastructure development, and large-scale civil works. Based in Surat, Gujarat.",
+            role: "Entrusted with the complete civil works development for Bio-CNG plant infrastructure, from earthwork planning to execution monitoring. Ensures all civil works are built to withstand operational loads, environmental conditions, and long-term usage.",
+            projects: [
+                {
+                    name: "Industrial Civil Works Management",
+                    desc: "Managed end-to-end civil construction for multiple industrial Bio-CNG facilities, ensuring adherence to quality and safety standards."
+                },
+                {
+                    name: "Site Infrastructure Development",
+                    desc: "Oversaw the development of comprehensive site infrastructure, including earthwork, roadworks, and structural foundations."
+                }
+            ],
+            competencies: [
+                "RCC and Industrial Building Construction",
+                "Site Planning, Execution, & Supervision",
+                "BOQ Preparation & Quantity Estimation",
+                "Project Scheduling & Resource Planning",
+                "Earthwork, Roadworks, & Structural Foundations",
+                "Quality Control & IS Codes Adherence",
+                "Coordination with Structural, Mechanical & Electrical Teams",
+                "Billing, Contractor Management, & Site Reporting"
+            ]
+        },
+        {
+            id: 8,
+            name: "Satish Chikodi",
+            designation: "Sr. Manager - Business Development",
+            email: "chikkodisatish@gmail.com",
+            image: "satish_chikodi.jpg",
+            experience: "Senior management professional with over 19 years of rich experience in Contracts Management, Planning & Execution of Estimation, Techno-commercial Operations, Project Sales & Marketing and People Management. Currently working with Greenesol Power Systems Pvt ltd.",
+            role: "Oversees proposals & estimation management, technical & commercial negotiation, and project coordination activities. Acquires technology tie-ups with National and International OEMs. Functions as Lead Member of Project Team from vendor selection to order placement.",
+            projects: [
+                {
+                    name: "NTPC Pilot Project",
+                    desc: "Played a vital role in executing a pilot project for NTPC at Ramagundum site, conceptualized by NTPC NETRA (R&D division), generating 100TR air-conditioning from exhaust of a thermal power plant."
+                },
+                {
+                    name: "Major Orders Acquisition",
+                    desc: "Secured major orders from ITC Bhadrachalam, Aarti / Bhushan Steels from Alstom Baroda, Adani Wilamar Oil through TDPS, NPC Rapp Unit 3 & 4, etc."
+                }
+            ],
+            competencies: [
+                "Contracts Management",
+                "Project Marketing & Sales",
+                "Business Development",
+                "Tendering & Bid Management",
+                "Strategic Alliances",
+                "Client / Contractors Management",
+                "Techno-commercial Operations"
+            ]
+        }
+    ];
 
-        // Login Panel Toggle (Removed as no login panel found in HTML, keeping for reference if needed later)
-        // const loginLink = document.getElementById('loginLink');
-        // const loginPanel = document.getElementById('loginPanel');
-        // const loginOverlay = document.getElementById('loginOverlay');
-        // const closeLogin = document.getElementById('closeLogin');
-        
-        // if (loginLink && loginPanel && loginOverlay && closeLogin) {
-        //     loginLink.addEventListener('click', (e) => {
-        //         e.preventDefault();
-        //         loginPanel.classList.add('active');
-        //         loginOverlay.classList.add('active');
-        //         document.body.style.overflow = 'hidden';
-        //     });
-            
-        //     closeLogin.addEventListener('click', () => {
-        //         loginPanel.classList.remove('active');
-        //         loginOverlay.classList.remove('active');
-        //         document.body.style.overflow = 'auto';
-        //     });
-            
-        //     loginOverlay.addEventListener('click', () => {
-        //         loginPanel.classList.remove('active');
-        //         loginOverlay.classList.remove('active');
-        //         document.body.style.overflow = 'auto';
-        //     });
-        // }
-        
-        // Testimonial Slider
-        const testimonials = document.querySelectorAll('.testimonial');
-        const dots = document.querySelectorAll('.nav-dot');
-        let currentTestimonial = 0;
-        
-        function showTestimonial(index) {
-            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            if (testimonials[index]) { // Ensure testimonial exists before adding class
-                testimonials[index].classList.add('active');
-            }
-            if (dots[index]) { // Ensure dot exists before adding class
-                dots[index].classList.add('active');
-            }
-            currentTestimonial = index;
+    // DOM elements
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMenu = document.querySelector('nav ul');
+    const teamGrid = document.querySelector('.team-grid'); // Get the team grid container
+
+    // Modal elements
+    const teamMemberModal = document.createElement('div');
+    teamMemberModal.id = 'teamMemberModal';
+    teamMemberModal.className = 'modal';
+    document.body.appendChild(teamMemberModal);
+
+    // Mobile Navigation Toggle
+    mobileToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = mobileToggle.querySelector('i');
+        if (icon.classList.contains('fa-bars')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
         }
-        
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showTestimonial(index);
-            });
+    });
+
+    // Close mobile menu when a link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+            }
         });
-        
-        // Auto-rotate testimonials
-        if (testimonials.length > 0) { // Only auto-rotate if there are testimonials
-            setInterval(() => {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            }, 5000);
+    });
+
+    // Testimonial Slider (existing code)
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.nav-dot');
+    let currentTestimonial = 0;
+
+    function showTestimonial(index) {
+        testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        if (testimonials[index]) {
+            testimonials[index].classList.add('active');
         }
-        
-        // Animation on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.classList.add('active');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-        
-        // Initialize Charts
-        document.addEventListener('DOMContentLoaded', function() {
-            // Environmental Impact Chart
-            const impactCtx = document.getElementById('impactChart');
-            if (impactCtx) { // Check if canvas element exists
-                const impactChart = new Chart(impactCtx.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['CO2 Reduction', 'Waste Processed', 'Energy Produced', 'Fertilizer Created'],
-                        datasets: [{
-                            data: [35, 25, 25, 15],
-                            backgroundColor: [
-                                '#1a5d1a',
-                                '#0d47a1',
-                                '#ff9800',
-                                '#4caf50'
-                            ],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20,
-                                    font: {
-                                        size: 12
-                                    }
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: 'Environmental Impact',
-                                font: {
-                                    size: 16,
-                                    weight: 'bold'
-                                },
-                                padding: 20
-                            }
-                        }
-                    }
-                });
+        if (dots[index]) {
+            dots[index].classList.add('active');
+        }
+        currentTestimonial = index;
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showTestimonial(index);
+        });
+    });
+
+    if (testimonials.length > 0) {
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+    }
+
+    // Animation on scroll (existing code)
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate');
+
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (elementPosition < screenPosition) {
+                element.classList.add('active');
             }
-            
-            // Investment Chart
-            const investmentCtx = document.getElementById('investmentChart');
-            if (investmentCtx) { // Check if canvas element exists
-                const investmentChart = new Chart(investmentCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['2020', '2021', '2022', '2023', '2024'],
-                        datasets: [{
-                            label: 'Revenue (₹ Crore)',
-                            data: [8.2, 12.5, 18.3, 24.7, 32.1],
-                            backgroundColor: '#1a5d1a',
-                            borderWidth: 0,
-                            borderRadius: 5
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Revenue (₹ Crore)'
-                                }
+        });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // Initialize Charts (existing code)
+    document.addEventListener('DOMContentLoaded', function() {
+        const impactCtx = document.getElementById('impactChart');
+        if (impactCtx) {
+            new Chart(impactCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['CO2 Reduction', 'Waste Processed', 'Energy Produced', 'Fertilizer Created'],
+                    datasets: [{
+                        data: [35, 25, 25, 15],
+                        backgroundColor: [
+                            '#00eaff',
+                            '#00aaff',
+                            '#ff9800',
+                            '#4caf50'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: { size: 12, family: 'Inter' },
+                                color: '#e0e0e0'
                             }
                         },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Revenue Growth',
-                                font: {
-                                    size: 16,
-                                    weight: 'bold'
-                                },
-                                padding: 20
-                            }
+                        title: {
+                            display: true,
+                            text: 'Environmental Impact',
+                            font: { size: 16, weight: 'bold', family: 'Inter' },
+                            color: '#00eaff',
+                            padding: 20
                         }
                     }
-                });
-            }
-        });
-  </script>
-  
-  
-  <!-- Inquire Now Modal Trigger Button -->
-  <button class="btn" onclick="document.getElementById('inquiryModal').style.display='block'">
-   Inquire Now
-  </button>
-  <div class="modal" id="inquiryModal">
-   <div class="modal-content">
-    <span class="close" onclick="document.getElementById('inquiryModal').style.display='none'">
-     ×
-    </span>
-    <h2>
-     Send Your Inquiry
-    </h2>
-    <form action="https://formsubmit.co/info@shreejabiotech.shop" method="POST">
-     <input name="_subject" type="hidden" value="Inquiry from Website Modal"/>
-     <input name="_captcha" type="hidden" value="false"/>
-     <div class="form-group">
-      <input name="name" placeholder="Your Name" required="" type="text"/>
-     </div>
-     <div class="form-group">
-      <input name="email" placeholder="Your Email" required="" type="email"/>
-     </div>
-     <div class="form-group">
-      <input name="phone" placeholder="Your Phone Number" type="text"/>
-     </div>
-     <div class="form-group">
-      <textarea name="message" placeholder="Your Message" required=""></textarea>
-     </div>
-     <button class="btn" type="submit">
-      Send Inquiry
-     </button>
-    </form>
-   </div>
-  </div>
-  <script>
-   // This script block was at the very end, moved it up to consolidate all main JS
-   // and ensure it runs after elements are defined.
-   window.onclick = function(event) {
-    var modal = document.getElementById('inquiryModal');
-    if (modal && event.target == modal) { // Added check for modal existence
-      modal.style.display = "none";
+                }
+            });
+        }
+
+        const investmentCtx = document.getElementById('investmentChart');
+        if (investmentCtx) {
+            new Chart(investmentCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Revenue (₹ Crore)',
+                        data: [8.2, 12.5, 18.3, 24.7, 32.1],
+                        backgroundColor: '#00eaff',
+                        borderWidth: 0,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Revenue (₹ Crore)', color: '#c0c0c0', font: { family: 'Inter' } },
+                            ticks: { color: '#c0c0c0', font: { family: 'Inter' } },
+                            grid: { color: 'rgba(0, 234, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#c0c0c0', font: { family: 'Inter' } },
+                            grid: { color: 'rgba(0, 234, 255, 0.1)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Revenue Growth',
+                            font: { size: 16, weight: 'bold', family: 'Inter' },
+                            color: '#00eaff',
+                            padding: 20
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    // Inquiry Modal Trigger Button (moved to be always visible)
+    document.body.insertAdjacentHTML('beforeend', `
+        <button class="btn fixed bottom-5 right-5 z-50 animate delay-6" onclick="document.getElementById('inquiryModal').style.display='block'">
+            Inquire Now
+        </button>
+    `);
+
+    // Global click handler for modals (updated to include teamMemberModal)
+    window.onclick = function(event) {
+        var inquiryModal = document.getElementById('inquiryModal');
+        var investorModal = document.getElementById('investorFormModal');
+        var teamModal = document.getElementById('teamMemberModal');
+
+        if (inquiryModal && event.target == inquiryModal) {
+            inquiryModal.style.display = "none";
+        }
+        if (investorModal && event.target == investorModal) {
+            investorModal.style.display = "none";
+        }
+        if (teamModal && event.target == teamModal) {
+            teamModal.style.display = "none";
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
     }
-  }
+
+    // Event delegation for "See More" buttons in Team section
+    teamGrid.addEventListener('click', function(e) {
+        if (e.target.classList.contains('see-more')) {
+            const memberId = parseInt(e.target.getAttribute('data-id'));
+            const member = teamData.find(m => m.id === memberId);
+            if (member) {
+                openTeamMemberModal(member);
+            }
+        }
+    });
+
+    // Function to open the team member modal
+    function openTeamMemberModal(member) {
+        teamMemberModal.innerHTML = `
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('teamMemberModal').style.display='none'; document.body.style.overflow='auto';">&times;</span>
+                <div class="modal-header">
+                    <div class="modal-img">
+                        <img src="${member.image}" alt="${member.name}" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1a1a3a/00eaff?text=${member.name.split(' ')[0].charAt(0)}+${member.name.split(' ')[1].charAt(0)}';"/>
+                    </div>
+                    <div class="modal-info">
+                        <h2>${member.name}</h2>
+                        <span class="designation">${member.designation}</span>
+                        <span class="email">${member.email}</span>
+                        <p>${member.experience}</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Role at Shreeja Biotech</h3>
+                    <p>${member.role}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Highlighted Projects</h3>
+                    <div class="projects-grid">
+                        ${member.projects.map(project => `
+                            <div class="project-card">
+                                <h4>${project.name}</h4>
+                                <p>${project.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Core Competencies</h3>
+                    <ul class="competencies">
+                        ${member.competencies.map(comp => `<li>${comp}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+        teamMemberModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
   </script>
  </body>
 </html>
